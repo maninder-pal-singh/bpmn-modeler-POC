@@ -1,0 +1,83 @@
+/* You can add global styles to this file, and also import other style files */
+.properties-panel {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 260px;
+  z-index: 10;
+  border-left: 1px solid #ccc;
+  overflow: auto;
+  padding: 16px;
+}
+
+.properties-panel:empty {
+  display: none;
+}
+
+.properties-panel > .djs-properties-panel {
+  padding-bottom: 70px;
+  min-height: 100%;
+}
+
+.bpmn-icon-service.red {
+  color: #cc0000 !important;
+  display: inline;
+}
+
+.bpmn-icon-service.yellow {
+  color: #ffc800 !important;
+}
+
+.bpmn-icon-service.green {
+  color: #52b415 !important;
+}
+
+.bpmn-icon-task {
+  display: none;
+}
+
+.bpmn-icon-intermediate-event-none{
+  display: none;
+}
+
+.bpmn-icon-subprocess-expanded{
+  display: none;
+}
+
+.bpmn-icon-data-object{
+  display: none;
+}
+
+.bpmn-icon-data-store{
+  display: none;
+}
+
+.bpmn-icon-participant{
+  display: none;
+}
+
+.bpmn-icon-group{
+  display: none;
+}
+
+.djs-context-pad.open{
+  .bpmn-icon-task {
+    display: none;
+  }
+
+  .bpmn-icon-service.red {
+    color: #cc0000 !important;
+    display: inline;
+  }
+
+  .bpmn-icon-service.yellow {
+    color: #ffc800 !important;
+    display: inline;
+  }
+
+  .bpmn-icon-service.green {
+    color: #52b415 !important;
+    display: inline;
+  }
+}

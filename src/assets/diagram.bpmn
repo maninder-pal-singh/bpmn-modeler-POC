@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<semantic:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:semantic="http://www.omg.org/spec/BPMN/20100524/MODEL" id="_1275940932088" targetNamespace="http://www.trisotech.com/definitions/_1275940932088" exporter="bpmn-js (https://demo.bpmn.io)" exporterVersion="8.7.1">
+  <semantic:message id="_1275940932310" />
+  <semantic:message id="_1275940932433" />
+  <semantic:message id="_1275940932198" />
+  <semantic:process id="Process_0vzwcyz">
+    <semantic:startEvent id="Event_196kqln" name="Start">
+      <semantic:outgoing>Flow_199yfke</semantic:outgoing>
+    </semantic:startEvent>
+    <semantic:sequenceFlow id="Flow_199yfke" sourceRef="Event_196kqln" targetRef="Activity_1ax0l90" />
+    <semantic:serviceTask id="Activity_1ax0l90" name="Trigger at interval">
+      <semantic:incoming>Flow_199yfke</semantic:incoming>
+      <semantic:outgoing>Flow_0z30k2z</semantic:outgoing>
+    </semantic:serviceTask>
+    <semantic:sequenceFlow id="Flow_0z30k2z" sourceRef="Activity_1ax0l90" targetRef="Activity_0rsgvrh" />
+    <semantic:serviceTask id="Activity_0rsgvrh" name="Read Task Column Value">
+      <semantic:incoming>Flow_0z30k2z</semantic:incoming>
+      <semantic:outgoing>Flow_0kl5xl2</semantic:outgoing>
+    </semantic:serviceTask>
+    <semantic:sequenceFlow id="Flow_0kl5xl2" sourceRef="Activity_0rsgvrh" targetRef="Gateway_0lmkqo9" />
+    <semantic:exclusiveGateway id="Gateway_0lmkqo9" name="Past Today">
+      <semantic:incoming>Flow_0kl5xl2</semantic:incoming>
+      <semantic:outgoing>Flow_13iejkw</semantic:outgoing>
+      <semantic:outgoing>Flow_0arzn40</semantic:outgoing>
+    </semantic:exclusiveGateway>
+    <semantic:serviceTask id="Activity_11pfsdg" name="Read Task Column Value">
+      <semantic:incoming>Flow_13iejkw</semantic:incoming>
+      <semantic:outgoing>Flow_0oims67</semantic:outgoing>
+    </semantic:serviceTask>
+    <semantic:sequenceFlow id="Flow_13iejkw" name="Yes" sourceRef="Gateway_0lmkqo9" targetRef="Activity_11pfsdg" />
+    <semantic:endEvent id="Event_0lyd1dh" name="End">
+      <semantic:incoming>Flow_0arzn40</semantic:incoming>
+      <semantic:incoming>Flow_171bvj2</semantic:incoming>
+    </semantic:endEvent>
+    <semantic:sequenceFlow id="Flow_0arzn40" name="No" sourceRef="Gateway_0lmkqo9" targetRef="Event_0lyd1dh" />
+    <semantic:exclusiveGateway id="Gateway_0w8wwl0" name="Equals" default="Flow_171bvj2">
+      <semantic:incoming>Flow_0oims67</semantic:incoming>
+      <semantic:outgoing>Flow_0b7fpt3</semantic:outgoing>
+      <semantic:outgoing>Flow_03y4qqd</semantic:outgoing>
+      <semantic:outgoing>Flow_171bvj2</semantic:outgoing>
+    </semantic:exclusiveGateway>
+    <semantic:sequenceFlow id="Flow_0oims67" sourceRef="Activity_11pfsdg" targetRef="Gateway_0w8wwl0" />
+    <semantic:sequenceFlow id="Flow_0b7fpt3" name="Open" sourceRef="Gateway_0w8wwl0" targetRef="Activity_0cg43e4" />
+    <semantic:sequenceFlow id="Flow_03y4qqd" name="In Progress" sourceRef="Gateway_0w8wwl0" targetRef="Activity_0cg43e4" />
+    <semantic:serviceTask id="Activity_0cg43e4" name="Change Task Column Value">
+      <semantic:incoming>Flow_0b7fpt3</semantic:incoming>
+      <semantic:incoming>Flow_03y4qqd</semantic:incoming>
+      <semantic:outgoing>Flow_1fav2ro</semantic:outgoing>
+    </semantic:serviceTask>
+    <semantic:sequenceFlow id="Flow_171bvj2" name="else" sourceRef="Gateway_0w8wwl0" targetRef="Event_0lyd1dh" />
+    <semantic:endEvent id="Event_1f65pv9" name="Done">
+      <semantic:incoming>Flow_05b1mfz</semantic:incoming>
+    </semantic:endEvent>
+    <semantic:startEvent id="Event_12d72tj" name="Start">
+      <semantic:outgoing>Flow_0x7hhly</semantic:outgoing>
+    </semantic:startEvent>
+    <semantic:serviceTask id="Activity_1q53xru" name="Trigger on change">
+      <semantic:incoming>Flow_0x7hhly</semantic:incoming>
+      <semantic:outgoing>Flow_0opekey</semantic:outgoing>
+    </semantic:serviceTask>
+    <semantic:serviceTask id="Activity_0eqtr99" name="Read Task Column Value">
+      <semantic:incoming>Flow_0opekey</semantic:incoming>
+      <semantic:outgoing>Flow_0j8shoq</semantic:outgoing>
+    </semantic:serviceTask>
+    <semantic:exclusiveGateway id="Gateway_1pa8or0" name="Equals" default="Flow_05eller">
+      <semantic:incoming>Flow_0j8shoq</semantic:incoming>
+      <semantic:outgoing>Flow_05eller</semantic:outgoing>
+      <semantic:outgoing>Flow_1flgyjl</semantic:outgoing>
+    </semantic:exclusiveGateway>
+    <semantic:endEvent id="Event_0o19wjn" name="End">
+      <semantic:incoming>Flow_05eller</semantic:incoming>
+    </semantic:endEvent>
+    <semantic:serviceTask id="Activity_0ny9oce" name="Change Task Column Value">
+      <semantic:incoming>Flow_15px0cs</semantic:incoming>
+      <semantic:outgoing>Flow_00dfi98</semantic:outgoing>
+    </semantic:serviceTask>
+    <semantic:endEvent id="Event_02g8sf5" name="Done">
+      <semantic:incoming>Flow_00dfi98</semantic:incoming>
+    </semantic:endEvent>
+    <semantic:sequenceFlow id="Flow_0x7hhly" sourceRef="Event_12d72tj" targetRef="Activity_1q53xru" />
+    <semantic:sequenceFlow id="Flow_0opekey" sourceRef="Activity_1q53xru" targetRef="Activity_0eqtr99" />
+    <semantic:sequenceFlow id="Flow_0j8shoq" sourceRef="Activity_0eqtr99" targetRef="Gateway_1pa8or0" />
+    <semantic:sequenceFlow id="Flow_05eller" name="else" sourceRef="Gateway_1pa8or0" targetRef="Event_0o19wjn" />
+    <semantic:sequenceFlow id="Flow_00dfi98" sourceRef="Activity_0ny9oce" targetRef="Event_02g8sf5" />
+    <semantic:sequenceFlow id="Flow_1fav2ro" sourceRef="Activity_0cg43e4" targetRef="Activity_1fvz9fa" />
+    <semantic:serviceTask id="Activity_1fvz9fa" name="Notify">
+      <semantic:incoming>Flow_1fav2ro</semantic:incoming>
+      <semantic:outgoing>Flow_05b1mfz</semantic:outgoing>
+    </semantic:serviceTask>
+    <semantic:sequenceFlow id="Flow_05b1mfz" sourceRef="Activity_1fvz9fa" targetRef="Event_1f65pv9" />
+    <semantic:serviceTask id="Activity_1r5g96o" name="Read Task Column Value">
+      <semantic:incoming>Flow_1flgyjl</semantic:incoming>
+      <semantic:outgoing>Flow_15px0cs</semantic:outgoing>
+    </semantic:serviceTask>
+    <semantic:sequenceFlow id="Flow_15px0cs" sourceRef="Activity_1r5g96o" targetRef="Activity_0ny9oce" />
+    <semantic:sequenceFlow id="Flow_1flgyjl" name="Testing" sourceRef="Gateway_1pa8or0" targetRef="Activity_1r5g96o" />
+    <semantic:textAnnotation id="TextAnnotation_1sgdxbu">
+      <semantic:text>Interval will be defined as parameter for this task from UI. It could be 15 mins, 4 hrs, 12 hrs, 24 hours, 7 days, 30 days, etc. Minimum it can be 15 mins.</semantic:text>
+    </semantic:textAnnotation>
+    <semantic:association id="Association_1m6sqhc" sourceRef="Activity_1ax0l90" targetRef="TextAnnotation_1sgdxbu" />
+    <semantic:textAnnotation id="TextAnnotation_1v5848l">
+      <semantic:text>Column title provided as parameter. Like Due Date</semantic:text>
+    </semantic:textAnnotation>
+    <semantic:association id="Association_1qpkt45" sourceRef="Activity_0rsgvrh" targetRef="TextAnnotation_1v5848l" />
+    <semantic:textAnnotation id="TextAnnotation_0nr6kxb">
+      <semantic:text>Column title provided as parameter. Like Status</semantic:text>
+    </semantic:textAnnotation>
+    <semantic:association id="Association_1riub6q" sourceRef="Activity_11pfsdg" targetRef="TextAnnotation_0nr6kxb" />
+    <semantic:textAnnotation id="TextAnnotation_0etawdo">
+      <semantic:text>Column title and new value provided as parameter. Like title=Is Delayed, value=true</semantic:text>
+    </semantic:textAnnotation>
+    <semantic:association id="Association_11yhxmv" sourceRef="Activity_0cg43e4" targetRef="TextAnnotation_0etawdo" />
+    <semantic:textAnnotation id="TextAnnotation_1uvpzkd">
+      <semantic:text>Trigger works on any change to task column values</semantic:text>
+    </semantic:textAnnotation>
+    <semantic:textAnnotation id="TextAnnotation_1ua0pt6">
+      <semantic:text>Column title provided as parameter. Like Status</semantic:text>
+    </semantic:textAnnotation>
+    <semantic:textAnnotation id="TextAnnotation_17t5tcz">
+      <semantic:text>Column title and new value provided as parameter. Like title=Assignee, value=${last_read}</semantic:text>
+    </semantic:textAnnotation>
+    <semantic:association id="Association_0opkuca" sourceRef="Activity_1q53xru" targetRef="TextAnnotation_1uvpzkd" />
+    <semantic:association id="Association_06d06d6" sourceRef="Activity_0eqtr99" targetRef="TextAnnotation_1ua0pt6" />
+    <semantic:association id="Association_0psy7v4" sourceRef="Activity_0ny9oce" targetRef="TextAnnotation_17t5tcz" />
+    <semantic:textAnnotation id="TextAnnotation_0i02fc8">
+      <semantic:text>user emails notified to be notified provided as parameter.</semantic:text>
+    </semantic:textAnnotation>
+    <semantic:association id="Association_0u8cpbk" sourceRef="Activity_1fvz9fa" targetRef="TextAnnotation_0i02fc8" />
+    <semantic:textAnnotation id="TextAnnotation_0cmkz0g">
+      <semantic:text>Column title provided as parameter. Like Tester</semantic:text>
+    </semantic:textAnnotation>
+    <semantic:association id="Association_0gcrpds" sourceRef="Activity_1r5g96o" targetRef="TextAnnotation_0cmkz0g" />
+  </semantic:process>
+  <bpmndi:BPMNDiagram id="Trisotech.Visio-_6" name="Untitled Diagram" documentation="" resolution="96.00000267028808">
+    <bpmndi:BPMNPlane bpmnElement="Process_0vzwcyz">
+      <bpmndi:BPMNShape id="TextAnnotation_1sgdxbu_di" bpmnElement="TextAnnotation_1sgdxbu">
+        <dc:Bounds x="210" y="180" width="290" height="69" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_1v5848l_di" bpmnElement="TextAnnotation_1v5848l">
+        <dc:Bounds x="490" y="150" width="159.3082740213523" height="40.33214709371293" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_0nr6kxb_di" bpmnElement="TextAnnotation_0nr6kxb">
+        <dc:Bounds x="680" y="190" width="159.3082740213523" height="40.33214709371293" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_1uvpzkd_di" bpmnElement="TextAnnotation_1uvpzkd">
+        <dc:Bounds x="210" y="540" width="180" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_0cmkz0g_di" bpmnElement="TextAnnotation_0cmkz0g">
+        <dc:Bounds x="680" y="550" width="159.3082740213523" height="40.33214709371293" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_1ua0pt6_di" bpmnElement="TextAnnotation_1ua0pt6">
+        <dc:Bounds x="438" y="540" width="159.3082740213523" height="40.33214709371293" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_0etawdo_di" bpmnElement="TextAnnotation_0etawdo">
+        <dc:Bounds x="970" y="80" width="219.99184460260977" height="59.99777580071174" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_0i02fc8_di" bpmnElement="TextAnnotation_0i02fc8">
+        <dc:Bounds x="1218" y="100" width="166.42571174377224" height="52.194543297746144" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_17t5tcz_di" bpmnElement="TextAnnotation_17t5tcz">
+        <dc:Bounds x="960" y="535" width="219.99184460260977" height="54.5670225385528" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_199yfke_di" bpmnElement="Flow_199yfke">
+        <di:waypoint x="188" y="320" />
+        <di:waypoint x="240" y="320" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0z30k2z_di" bpmnElement="Flow_0z30k2z">
+        <di:waypoint x="340" y="320" />
+        <di:waypoint x="400" y="320" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0kl5xl2_di" bpmnElement="Flow_0kl5xl2">
+        <di:waypoint x="500" y="320" />
+        <di:waypoint x="565" y="320" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_13iejkw_di" bpmnElement="Flow_13iejkw">
+        <di:waypoint x="615" y="320" />
+        <di:waypoint x="670" y="320" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="633" y="302" width="19" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0arzn40_di" bpmnElement="Flow_0arzn40">
+        <di:waypoint x="590" y="345" />
+        <di:waypoint x="590" y="430" />
+        <di:waypoint x="672" y="430" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="598" y="385" width="15" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0oims67_di" bpmnElement="Flow_0oims67">
+        <di:waypoint x="770" y="320" />
+        <di:waypoint x="825" y="320" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0b7fpt3_di" bpmnElement="Flow_0b7fpt3">
+        <di:waypoint x="850" y="295" />
+        <di:waypoint x="850" y="210" />
+        <di:waypoint x="930" y="210" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="877" y="192" width="27" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_03y4qqd_di" bpmnElement="Flow_03y4qqd">
+        <di:waypoint x="875" y="320" />
+        <di:waypoint x="980" y="320" />
+        <di:waypoint x="980" y="250" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="921" y="278" width="57" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_171bvj2_di" bpmnElement="Flow_171bvj2">
+        <di:waypoint x="850" y="345" />
+        <di:waypoint x="850" y="430" />
+        <di:waypoint x="710" y="430" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="859" y="363" width="21" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0x7hhly_di" bpmnElement="Flow_0x7hhly">
+        <di:waypoint x="188" y="680" />
+        <di:waypoint x="240" y="680" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0opekey_di" bpmnElement="Flow_0opekey">
+        <di:waypoint x="340" y="680" />
+        <di:waypoint x="400" y="680" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0j8shoq_di" bpmnElement="Flow_0j8shoq">
+        <di:waypoint x="500" y="680" />
+        <di:waypoint x="565" y="680" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1flgyjl_di" bpmnElement="Flow_1flgyjl">
+        <di:waypoint x="615" y="680" />
+        <di:waypoint x="670" y="680" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="625" y="662" width="35" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_05eller_di" bpmnElement="Flow_05eller">
+        <di:waypoint x="590" y="705" />
+        <di:waypoint x="590" y="790" />
+        <di:waypoint x="672" y="790" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="595" y="745" width="21" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_00dfi98_di" bpmnElement="Flow_00dfi98">
+        <di:waypoint x="950" y="680" />
+        <di:waypoint x="1062" y="680" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1fav2ro_di" bpmnElement="Flow_1fav2ro">
+        <di:waypoint x="1030" y="210" />
+        <di:waypoint x="1100" y="210" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_05b1mfz_di" bpmnElement="Flow_05b1mfz">
+        <di:waypoint x="1200" y="210" />
+        <di:waypoint x="1302" y="210" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_15px0cs_di" bpmnElement="Flow_15px0cs">
+        <di:waypoint x="770" y="680" />
+        <di:waypoint x="850" y="680" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_196kqln_di" bpmnElement="Event_196kqln">
+        <dc:Bounds x="152" y="302" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="158" y="345" width="24" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_07tu28k_di" bpmnElement="Activity_1ax0l90">
+        <dc:Bounds x="240" y="280" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1tac1vs_di" bpmnElement="Activity_0rsgvrh">
+        <dc:Bounds x="400" y="280" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_0xf9szt_di" bpmnElement="Gateway_0lmkqo9" isMarkerVisible="true">
+        <dc:Bounds x="565" y="295" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="562.5" y="271" width="55" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_11pfsdg_di" bpmnElement="Activity_11pfsdg">
+        <dc:Bounds x="670" y="280" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0lyd1dh_di" bpmnElement="Event_0lyd1dh">
+        <dc:Bounds x="672" y="412" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="680" y="455" width="20" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_0w8wwl0_di" bpmnElement="Gateway_0w8wwl0" isMarkerVisible="true">
+        <dc:Bounds x="825" y="295" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="802" y="293" width="35" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1b6osqh_di" bpmnElement="Activity_0cg43e4">
+        <dc:Bounds x="930" y="170" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_12d72tj_di" bpmnElement="Event_12d72tj">
+        <dc:Bounds x="152" y="662" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="158" y="705" width="24" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1q53xru_di" bpmnElement="Activity_1q53xru">
+        <dc:Bounds x="240" y="640" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0eqtr99_di" bpmnElement="Activity_0eqtr99">
+        <dc:Bounds x="400" y="640" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1pa8or0_di" bpmnElement="Gateway_1pa8or0" isMarkerVisible="true">
+        <dc:Bounds x="565" y="655" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="573" y="631" width="35" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1r5g96o_di" bpmnElement="Activity_1r5g96o">
+        <dc:Bounds x="670" y="640" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0o19wjn_di" bpmnElement="Event_0o19wjn">
+        <dc:Bounds x="672" y="772" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="680" y="815" width="20" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1x4oslp_di" bpmnElement="Activity_1fvz9fa">
+        <dc:Bounds x="1100" y="170" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1f65pv9_di" bpmnElement="Event_1f65pv9">
+        <dc:Bounds x="1302" y="192" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1307" y="235" width="27" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0ny9oce_di" bpmnElement="Activity_0ny9oce">
+        <dc:Bounds x="850" y="640" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_02g8sf5_di" bpmnElement="Event_02g8sf5">
+        <dc:Bounds x="1062" y="662" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1067" y="705" width="27" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_1m6sqhc_di" bpmnElement="Association_1m6sqhc">
+        <di:waypoint x="280" y="280" />
+        <di:waypoint x="273" y="249" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_1qpkt45_di" bpmnElement="Association_1qpkt45">
+        <di:waypoint x="473" y="280" />
+        <di:waypoint x="525" y="190" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_1riub6q_di" bpmnElement="Association_1riub6q">
+        <di:waypoint x="713" y="280" />
+        <di:waypoint x="704" y="230" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_0opkuca_di" bpmnElement="Association_0opkuca">
+        <di:waypoint x="280" y="640" />
+        <di:waypoint x="273" y="590" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_0gcrpds_di" bpmnElement="Association_0gcrpds">
+        <di:waypoint x="713" y="640" />
+        <di:waypoint x="704" y="590" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_06d06d6_di" bpmnElement="Association_06d06d6">
+        <di:waypoint x="473" y="640" />
+        <di:waypoint x="473" y="580" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_11yhxmv_di" bpmnElement="Association_11yhxmv">
+        <di:waypoint x="994" y="170" />
+        <di:waypoint x="1004" y="140" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_0u8cpbk_di" bpmnElement="Association_0u8cpbk">
+        <di:waypoint x="1196" y="173" />
+        <di:waypoint x="1222" y="152" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_0psy7v4_di" bpmnElement="Association_0psy7v4">
+        <di:waypoint x="928" y="640" />
+        <di:waypoint x="979" y="590" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</semantic:definitions>

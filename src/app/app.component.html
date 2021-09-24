@@ -1,0 +1,52 @@
+<h1>
+  {{ title }}
+</h1>
+
+<button (click)="load()">Load</button>
+<button (click)="save()">Save</button>
+<div class="modeler">
+  <div id="canvas" #canvas></div>
+  <!-- <div class="properties-panel" id="properties"></div> -->
+  <div class="properties-panel">
+    <div *ngIf="selectedElementType === 'timerstart'">
+      <select (change)="changeTimer($event)">
+        <option value="0">Choose Timer cycle</option>
+        <option value="5">5 mins</option>
+        <option value="10">10 mins</option>
+      </select>
+    </div>
+    <div *ngIf="selectedElementType === 'notifytask'">
+      <select (change)="changeRecipient($event)">
+        <option value="0">Choose Recipient</option>
+        <option value="maninder@sourcefuse.com">Maninder</option>
+        <option value="ashish@sourcefuse.com">Ashish</option>
+      </select>
+    </div>
+    <div *ngIf="selectedElementType === 'changetask'">change</div>
+    <div *ngIf="selectedElementType === 'readtask'">
+      <select (change)="changeReadTaskColumnType($event)">
+        <option value="0">Choose Column type</option>
+        <option value="date-col-id">Date</option>
+        <option value="status-col-id">Status</option>
+      </select>
+    </div>
+    <div *ngIf="selectedElementType === 'exclusivegateway'">
+      <select *ngIf="selectedGatewayColType === 'status'" (change)="changeStatusGateway($event)">
+        <option value="0">Choose Gateway type</option>
+        <option value="equal">Equal</option>
+        <option value="notequal">Not Equal</option>
+      </select>
+      <select *ngIf="selectedGatewayColType === 'date'" (change)="changeDateGateway($event)">
+        <option value="0">Choose Gateway type</option>
+        <option value="pasttoday">Past Today</option>
+      </select>
+    </div>
+    <div *ngIf="selectedElementType === 'exclusivegatewayoutgoing'" >
+      <select *ngIf="selectedGatewayColType === 'status'" (change)="changeOutgoingStatusFlow($event)">
+        <option value="0">Choose Status</option>
+        <option value="done">Done</option>
+        <option value="inprogress">In Progress</option>
+      </select>
+    </div>
+  </div>
+</div>
